@@ -2,6 +2,8 @@ package com.fyp.siri.services;
 
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fyp.siri.models.Appointment;
@@ -12,9 +14,13 @@ public class PatientServImpl implements PatientServ {
 
 	private ArrayList<Patient> patientArr = new ArrayList<Patient>();
 	private ArrayList<Appointment> appointmentArr = new ArrayList<Appointment>();
+	private PasswordEncoder encoder;
 	
 	@Override
 	public Patient addPatient(Patient patient) {
+		this.encoder = new BCryptPasswordEncoder();
+		String encodedPassword = this.encoder.encode(patient.getPassword());
+		patient.setPassword(encodedPassword);
 		patientArr.add(patient);
 		return patientArr.get(patientArr.size()-1);
 	}
