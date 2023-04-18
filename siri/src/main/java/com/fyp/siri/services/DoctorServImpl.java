@@ -1,64 +1,47 @@
 package com.fyp.siri.services;
 
-import java.util.ArrayList;
-
+import java.util.Optional;
 import org.springframework.stereotype.Service;
-
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Doctor;
+import com.fyp.siri.repository.DoctorRepository;
 
 @Service
 public class DoctorServImpl implements DoctorServ{
 	
-	private ArrayList<Doctor> doctorArr = new ArrayList<Doctor>();
+	private DoctorRepository docRepo;
+//	private AppointmentRepository appRepo;
 	
 	@Override
 	public Doctor addDoctor(Doctor doctor) {
-		doctorArr.add(doctor);
-		return doctorArr.get(doctorArr.size()-1);
+		docRepo.save(doctor);
+		return doctor;
 	}
 
 	@Override
-	public Doctor viewDoctor(String doctorId) {
-		for(Doctor doctor : doctorArr) {
-			if(doctorId.equals(doctor.getDoctorId()))
-				return doctor;
-		}
+	public Optional<Doctor> viewDoctor(Integer doctorId) {
+		return docRepo.findById(doctorId);
+	}
+
+	@Override
+	public boolean deleteDoctor(Integer doctorId) {
+		docRepo.deleteById(doctorId);
+		return true;
+	}
+
+	@Override
+	public Doctor updateDoctor(Integer doctorId, Doctor doctor) {
+		docRepo.deleteById(doctorId);
+		return docRepo.save(doctor);
+	}
+
+	@Override
+	public Appointment viewAppointments(Integer doctorId) {
 		return null;
 	}
 
 	@Override
-	public Doctor deleteDoctor(String doctorId) {
-		for(Doctor doctor : doctorArr) {
-			if(doctorId.equals(doctor.getDoctorId())) {
-				doctorArr.remove(doctor);
-				return doctor;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public Doctor updateDoctor(String doctorId, Doctor doctor) {
-		for(Doctor doc : doctorArr) {
-			if(doctorId.equals(doc.getDoctorId())) {
-				doctorArr.remove(doc);
-				doctorArr.add(doctor);
-				return doctor;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public Appointment viewAppointments(String doctorId) {
-		
-		return null;
-	}
-
-	@Override
-	public Appointment deleteAppointment(String appointmentId) {
-		
+	public Appointment deleteAppointment(Integer appointmentId) {
 		return null;
 	}
 

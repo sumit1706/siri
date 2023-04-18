@@ -1,8 +1,13 @@
 package com.fyp.siri.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="patient")
 public class Patient {
 
 	private String name;
+	@Id
 	private String email;
 	private String password;
 	private String address;

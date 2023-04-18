@@ -1,18 +1,23 @@
 package com.fyp.siri.models;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="doctor")
 public class Doctor {
 	
-	private String doctorId;
+	@Id
+	@Column(name="doctor_id")
+	private Integer doctorId;
 	private String name;
 	private String department;
 	private int experience;
-	private int phone;
+	private long phone;
 	private String email;
 	
 	public Doctor() {
 		super();
 	}
-	public Doctor(String doctorId, String name, String department, int experience, int phone, String email) {
+	public Doctor(Integer doctorId, String name, String department, int experience, long phone, String email) {
 		super();
 		this.doctorId = doctorId;
 		this.name = name;
@@ -21,10 +26,10 @@ public class Doctor {
 		this.phone = phone;
 		this.email = email;
 	}
-	public String getDoctorId() {
+	public Integer getDoctorId() {
 		return doctorId;
 	}
-	public void setDoctorId(String doctorId) {
+	public void setDoctorId(Integer doctorId) {
 		this.doctorId = doctorId;
 	}
 	public String getName() {
@@ -45,10 +50,10 @@ public class Doctor {
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {

@@ -1,5 +1,7 @@
 package com.fyp.siri.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class DoctorController {
 	private DoctorServ doctorServ;
 	
 	@GetMapping("/viewDoctor/{doctorId}")
-	public Doctor viewDoctor(@PathVariable String doctorId) {
+	public Optional<Doctor> viewDoctor(@PathVariable Integer doctorId) {
 		return doctorServ.viewDoctor(doctorId);
 	}
 	
@@ -30,22 +32,22 @@ public class DoctorController {
 	}
 	
 	@PutMapping("/updateDoctor/{doctorId}")
-	public Doctor updateDoctor(@PathVariable String doctorId , @RequestBody Doctor doctor) {
+	public Doctor updateDoctor(@PathVariable Integer doctorId , @RequestBody Doctor doctor) {
 		return doctorServ.updateDoctor(doctorId, doctor);
 	}
 	
 	@DeleteMapping("/deleteDoctor/{doctorId}")
-	public Doctor deleteDoctor(@PathVariable String doctorId) {
+	public boolean deleteDoctor(@PathVariable Integer doctorId) {
 		return doctorServ.deleteDoctor(doctorId);
 	}
 	
 	@GetMapping("/viewAppointments/{doctorId}")
-	public Appointment viewAppointments(@PathVariable String doctorId) {
+	public Appointment viewAppointments(@PathVariable Integer doctorId) {
 		return doctorServ.viewAppointments(doctorId);
 	}
 	
 	@DeleteMapping("/deleteDoctorAppointment/{appointmentId}")
-	public Appointment deleteAppointment(@PathVariable String appointmentId) {
+	public Appointment deleteAppointment(@PathVariable Integer appointmentId) {
 		return doctorServ.deleteAppointment(appointmentId);
 	}
 

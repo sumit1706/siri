@@ -1,5 +1,7 @@
 package com.fyp.siri.services;
 
+import java.util.Optional;
+
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Doctor;
 
@@ -7,14 +9,14 @@ public interface DoctorServ {
 	
 	public Doctor addDoctor(Doctor doctor);
 	
-	public Doctor viewDoctor(String doctorId);
+	public Optional<Doctor> viewDoctor(Integer doctorId);
 	
-	public Doctor deleteDoctor(String doctorId);
+	public boolean deleteDoctor(Integer doctorId);
 	
-	public Doctor updateDoctor(String doctorId, Doctor doctor);
+	public Doctor updateDoctor(Integer doctorId, Doctor doctor);
 	
-	public Appointment viewAppointments(String doctorId);
+	public Appointment viewAppointments(Integer doctorId);
 	
-	public Appointment deleteAppointment(String appointmentId);
+	public Appointment deleteAppointment(Integer appointmentId);
 	
 }

@@ -1,6 +1,9 @@
 package com.fyp.siri.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.query.Procedure;
 
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Patient;
@@ -11,16 +14,17 @@ public interface PatientServ {
 	
 	public ArrayList<Patient> viewPatient();
 	
-	public Patient viewPatient(String patientId);
+	public Optional<Patient> viewPatient(String email);
 	
-	public Patient deletePatient(String patientId);
+	public boolean deletePatient(String email);
 	
-	public Patient updatePatient(String patientId, Patient patient);
+	public Patient updatePatient(String email, Patient patient);
 	
-	public Appointment bookAppointment(String patientId, Appointment appointment);
+	public Appointment bookAppointment(Appointment appointment);
 	
-	public Appointment viewAppointments(String patientId);
+	public boolean deleteAppointment(Integer appointmentId);	
 	
-	public Appointment deleteAppointment(String appointmentId);	
+	@Procedure
+	public ArrayList<Appointment> findAppointments(String email);
 	
 }
