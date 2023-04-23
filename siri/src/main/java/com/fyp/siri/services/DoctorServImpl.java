@@ -1,6 +1,9 @@
 package com.fyp.siri.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Doctor;
@@ -9,6 +12,7 @@ import com.fyp.siri.repository.DoctorRepository;
 @Service
 public class DoctorServImpl implements DoctorServ{
 	
+	@Autowired
 	private DoctorRepository docRepo;
 //	private AppointmentRepository appRepo;
 	
@@ -21,6 +25,11 @@ public class DoctorServImpl implements DoctorServ{
 	@Override
 	public Optional<Doctor> viewDoctor(Integer doctorId) {
 		return docRepo.findById(doctorId);
+	}
+
+	@Override
+	public ArrayList<Doctor> viewDoctor() {
+		return (ArrayList<Doctor>) docRepo.findAll();
 	}
 
 	@Override

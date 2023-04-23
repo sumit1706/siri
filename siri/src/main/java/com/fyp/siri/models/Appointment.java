@@ -12,7 +12,7 @@ import jakarta.persistence.GenerationType;
 public class Appointment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer appointmentId;
 	@Column(name = "patient_email")
 	private String patientEmail;
@@ -25,9 +25,8 @@ public class Appointment {
 		super();
 	}
 
-	public Appointment(Integer appointmentId, String patientEmail, Integer doctorId, Date date, Time time) {
+	public Appointment(String patientEmail, Integer doctorId, Date date, Time time) {
 		super();
-		this.appointmentId = appointmentId;
 		this.patientEmail = patientEmail;
 		this.doctorId = doctorId;
 		this.date = date;

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Patient;
+import com.fyp.siri.models.User;
 
 public interface PatientServ {
 	
@@ -19,6 +20,8 @@ public interface PatientServ {
 	public boolean deletePatient(String email);
 	
 	public Patient updatePatient(String email, Patient patient);
+	
+	public boolean loginPatient(User user);
 	
 	public Appointment bookAppointment(Appointment appointment);
 	

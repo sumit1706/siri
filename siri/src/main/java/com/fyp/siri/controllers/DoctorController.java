@@ -1,5 +1,6 @@
 package com.fyp.siri.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class DoctorController {
 	@GetMapping("/viewDoctor/{doctorId}")
 	public Optional<Doctor> viewDoctor(@PathVariable Integer doctorId) {
 		return doctorServ.viewDoctor(doctorId);
+	}
+	
+	@GetMapping("/viewDoctor")
+	public ArrayList<Doctor> viewDoctor() {
+		return doctorServ.viewDoctor();
 	}
 	
 	@PostMapping("/addDoctor")

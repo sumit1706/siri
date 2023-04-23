@@ -3,12 +3,14 @@ package com.fyp.siri.services;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Patient;
+import com.fyp.siri.models.User;
 import com.fyp.siri.repository.AppointmentRepository;
 import com.fyp.siri.repository.PatientRepository;
 
@@ -16,7 +18,9 @@ import com.fyp.siri.repository.PatientRepository;
 public class PatientServImpl implements PatientServ {
 
 	private PasswordEncoder encoder;
+	@Autowired
 	private PatientRepository patRepo;
+	@Autowired
 	private AppointmentRepository appRepo;
 	
 	
@@ -47,6 +51,9 @@ public class PatientServImpl implements PatientServ {
 	@Override
 	public Patient updatePatient(String email, Patient patient) {
 		patRepo.deleteById(email);
+		this.encoder = new BCryptPasswordEncoder();
+		String encodedPassword = this.encoder.encode(patient.getPassword());
+		patient.setPassword(encodedPassword);
 		return patRepo.save(patient);
 	}
 
@@ -64,6 +71,18 @@ public class PatientServImpl implements PatientServ {
 	@Override
 	public ArrayList<Appointment> findAppointments(String email) {
 		return null;
+	}
+
+	@Override
+	public boolean loginPatient(User user) {
+		if(patRepo.existsById(user.getEmail())) {
+			Patient curPatient = patRepo.findByEmail(user.getEmail());
+			if(encoder.matches(user.getPassword(), curPatient.getPassword()))
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 }

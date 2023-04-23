@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
-import com.fyp.siri.repository.PatientRepository;
 import com.fyp.siri.services.PatientServ;
 
 @RestController
@@ -26,10 +23,7 @@ public class PatientController {
 	@Autowired
 	private PatientServ patientServ;
 	
-	private PatientRepository patRepo;
-	private PasswordEncoder encoder = new BCryptPasswordEncoder();
-	
-	@GetMapping("/viewPatient/{patientId}")
+	@GetMapping("/viewPatient/{email}")
 	public Optional<Patient> viewDoctor(@PathVariable String email) {
 		return patientServ.viewPatient(email);
 	}
@@ -45,20 +39,13 @@ public class PatientController {
 	}
 	
 	@PostMapping("/loginPatient")
-	public String loginPatient(@RequestBody User user) {
-		if(patRepo.existsById(user.getEmail())) {
-			Patient curPatient = patRepo.findByEmail(user.getEmail());
-			if(encoder.matches(user.getPassword(), curPatient.getPassword()))
-				return "Password matches";
-			else
-				return "Incorrect password";
-		}
-		return "User do not exist";
+	public boolean loginPatient(@RequestBody User user) {
+		return patientServ.loginPatient(user);
 	}
 	
-	@PutMapping("/updatePatient/{patientId}")
-	public Patient updatePatient(@PathVariable String patientId , @RequestBody Patient patient) {
-		return patientServ.updatePatient(patientId, patient);
+	@PutMapping("/updatePatient/{email}")
+	public Patient updatePatient(@PathVariable String email , @RequestBody Patient patient) {
+		return patientServ.updatePatient(email, patient);
 	}
 	
 	@DeleteMapping("/deletePatient/{email}")
