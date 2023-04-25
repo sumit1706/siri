@@ -12,7 +12,7 @@ import jakarta.persistence.GenerationType;
 public class Appointment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer appointmentId;
 	@Column(name = "patient_email")
 	private String patientEmail;

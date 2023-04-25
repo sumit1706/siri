@@ -9,9 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fyp.siri.models.Appointment;
+import com.fyp.siri.models.Order;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
 import com.fyp.siri.repository.AppointmentRepository;
+import com.fyp.siri.repository.OrderRepository;
 import com.fyp.siri.repository.PatientRepository;
 
 @Service
@@ -22,6 +24,8 @@ public class PatientServImpl implements PatientServ {
 	private PatientRepository patRepo;
 	@Autowired
 	private AppointmentRepository appRepo;
+	@Autowired
+	private OrderRepository orderRepo;
 	
 	
 	@Override
@@ -70,7 +74,7 @@ public class PatientServImpl implements PatientServ {
 
 	@Override
 	public ArrayList<Appointment> findAppointments(String email) {
-		return null;
+		return appRepo.findByPatientEmail(email);
 	}
 
 	@Override
@@ -85,4 +89,15 @@ public class PatientServImpl implements PatientServ {
 		return false;
 	}
 
+	@Override
+	public String placeOrder(Order order) {
+		try {
+			orderRepo.save(order);
+			return "Order Placed Sucessfully";
+		}
+		catch(Exception e){
+			return "Order was NOT placed";
+		}
+	}
+		
 }

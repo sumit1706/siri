@@ -1,5 +1,6 @@
 package com.fyp.siri.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -10,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fyp.siri.models.Appointment;
+import com.fyp.siri.models.Order;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
 import com.fyp.siri.services.PatientServ;
@@ -53,14 +57,15 @@ public class PatientController {
 		return patientServ.deletePatient(email);
 	}
 	
-	@PostMapping("/bookAppointments/{patientId}")
-	public Appointment bookAppointment(@PathVariable String patientId, @RequestBody Appointment appointment) {
+	@PostMapping("/bookAppointments/{email}")
+	public Appointment bookAppointment(@PathVariable String email, @RequestBody Appointment appointment) {
+		System.out.println(appointment.toString());
 		return patientServ.bookAppointment(appointment);
 	}
 	
-	@GetMapping("/viewAppointments/{patientId}")
-	public ArrayList<Appointment> viewAppointments(@PathVariable String patientId) {
-		return patientServ.findAppointments(patientId);
+	@GetMapping("/viewAppointments/{email}")
+	public ArrayList<Appointment> viewAppointments(@PathVariable String email) {
+		return patientServ.findAppointments(email);
 	}
 	
 	@DeleteMapping("/deletePatientAppointment/{appointmentId}")
@@ -68,4 +73,14 @@ public class PatientController {
 		return patientServ.deleteAppointment(appointmentId);
 	}
 	
+	@PostMapping("/placeOrder")
+	public String placeOrder(@RequestParam("name") String name, @RequestParam("address") String address, @RequestParam("phone") long phone, @RequestParam("email") String email, @RequestParam("file") MultipartFile file) throws IOException {
+		Order order = new Order();
+		order.setName(name);
+		order.setAddress(address);
+		order.setPhone(phone);
+		order.setEmail(email);
+		order.setImage(file.getBytes());
+		return patientServ.placeOrder(order);
+	}
 }

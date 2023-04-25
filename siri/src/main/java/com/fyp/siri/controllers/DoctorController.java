@@ -47,7 +47,7 @@ public class DoctorController {
 		return doctorServ.deleteDoctor(doctorId);
 	}
 	
-	@GetMapping("/viewAppointments/{doctorId}")
+	@GetMapping("/viewDoctorAppointments/{doctorId}")
 	public Appointment viewAppointments(@PathVariable Integer doctorId) {
 		return doctorServ.viewAppointments(doctorId);
 	}
