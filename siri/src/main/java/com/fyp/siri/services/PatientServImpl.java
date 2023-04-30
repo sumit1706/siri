@@ -96,7 +96,7 @@ public class PatientServImpl implements PatientServ {
 			return "Order Placed Sucessfully";
 		}
 		catch(Exception e){
-			return "Order was NOT placed";
+			return e.toString();
 		}
 	}
 		

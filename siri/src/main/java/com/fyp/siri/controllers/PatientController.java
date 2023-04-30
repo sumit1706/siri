@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.fyp.siri.models.User;
 import com.fyp.siri.services.PatientServ;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class PatientController {
 
 	@Autowired
@@ -57,8 +59,8 @@ public class PatientController {
 		return patientServ.deletePatient(email);
 	}
 	
-	@PostMapping("/bookAppointments/{email}")
-	public Appointment bookAppointment(@PathVariable String email, @RequestBody Appointment appointment) {
+	@PostMapping("/bookAppointments")
+	public Appointment bookAppointment(@RequestBody Appointment appointment) {
 		System.out.println(appointment.toString());
 		return patientServ.bookAppointment(appointment);
 	}

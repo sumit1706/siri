@@ -10,5 +10,4 @@ public class SiriApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SiriApplication.class, args);
 	}
-
 }
