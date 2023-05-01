@@ -82,7 +82,8 @@ public class PatientController {
 		order.setAddress(address);
 		order.setPhone(phone);
 		order.setEmail(email);
-		order.setImage(file.getBytes());
+		order.setFile(file.getBytes());
+		System.out.println(order.getFile());
 		return patientServ.placeOrder(order);
 	}
 }

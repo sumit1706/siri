@@ -79,9 +79,10 @@ public class PatientServImpl implements PatientServ {
 
 	@Override
 	public boolean loginPatient(User user) {
+		this.encoder = new BCryptPasswordEncoder();
 		if(patRepo.existsById(user.getEmail())) {
 			Patient curPatient = patRepo.findByEmail(user.getEmail());
-			if(encoder.matches(user.getPassword(), curPatient.getPassword()))
+			if(curPatient!= null && encoder.matches(user.getPassword(), curPatient.getPassword()))
 				return true;
 			else
 				return false;

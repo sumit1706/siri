@@ -5,7 +5,7 @@ import java.util.Arrays;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="order")
+@Table(name="`order`")
 public class Order {
 	
 	@Id
@@ -17,18 +17,18 @@ public class Order {
 	private long phone;
 	private String email;
 	@Lob
-	private byte[] image;
+	private byte[] file;
 	
 	public Order() {
 		super();
 	}
-	public Order(String name, String address, long phone, String email, byte[] image) {
+	public Order(String name, String address, long phone, String email, byte[] file) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.image = image;
+		this.file = file;
 	}
 
 	public String getName() {
@@ -56,16 +56,16 @@ public class Order {
 		this.email = email;
 	}
 	
-	public byte[] getImage() {
-		return image;
+	public byte[] getFile() {
+		return file;
 	}
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setFile(byte[] file) {
+		this.file = file;
 	}
 	
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", name=" + name + ", address=" + address + ", phone=" + phone + ", email="
-				+ email + ", image=" + Arrays.toString(image) + "]";
+				+ email + ", image=" + Arrays.toString(file) + "]";
 	}
 }
