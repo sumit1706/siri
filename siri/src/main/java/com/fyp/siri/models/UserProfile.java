@@ -1,11 +1,14 @@
 package com.fyp.siri.models;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class UserProfile {
 
 	private String name;
 	private String email;
+	private String gender;
+	private Date dob;
 	private String address;
 	private long phone;
 	public ArrayList<Order> previousOrders = new ArrayList<Order>();
@@ -41,6 +44,18 @@ public class UserProfile {
 		return "UserProfile [name=" + name + ", email=" + email + ", address=" + address
 				+ ", phone=" + phone + ", previousOrders=" + previousOrders + ", previousAppointments="
 				+ previousAppointments + "]";
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 	
 }

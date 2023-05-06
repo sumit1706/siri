@@ -1,7 +1,9 @@
 package com.fyp.siri.controllers;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,8 @@ public class PatientController {
 		order.setAddress(address);
 		order.setPhone(phone);
 		order.setEmail(email);
+		order.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		order.setTime(new Time(System.currentTimeMillis()));
 		order.setFile(file.getBytes());
 		System.out.println(order.getFile());
 		return patientServ.placeOrder(order);

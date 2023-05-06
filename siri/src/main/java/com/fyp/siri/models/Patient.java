@@ -1,30 +1,36 @@
 package com.fyp.siri.models;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="patient")
 public class Patient {
 
+
 	private String name;
 	@Id
 	private String email;
 	private String password;
+	private String gender;
+	private Date dob;
 	private String address;
 	private long phone;
-	
 	
 	public Patient() {
 		super();
 	}
 	
-	public Patient(String name, String email, String password,  String address, long phone) {
+	public Patient(String name, String email, String password, String gender, Date dob, String address, long phone) {
 		super();
-		this.password = password;
 		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.gender = gender;
+		this.dob = dob;
 		this.address = address;
 		this.phone = phone;
-		this.email = email;
 	}
 
 	public String getName() {
@@ -70,6 +76,22 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient [name=" + name + ", email=" + email + ", password=" + password + ", address=" + address + ", phone=" + phone + "]";
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 }

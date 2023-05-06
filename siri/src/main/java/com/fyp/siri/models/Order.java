@@ -1,6 +1,8 @@
 package com.fyp.siri.models;
 
+import java.sql.Time;
 import java.util.Arrays;
+import java.sql.Date;
 
 import jakarta.persistence.*;
 
@@ -12,6 +14,8 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="order_id")
 	private int orderId;
+	private Date date;
+	private Time time;
 	private String name;
 	private String address;
 	private long phone;
@@ -67,5 +71,23 @@ public class Order {
 	public String toString() {
 		return "Order [orderId=" + orderId + ", name=" + name + ", address=" + address + ", phone=" + phone + ", email="
 				+ email + ", image=" + Arrays.toString(file) + "]";
+	}
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public Time getTime() {
+		return time;
+	}
+	public void setTime(Time time) {
+		this.time = time;
 	}
 }

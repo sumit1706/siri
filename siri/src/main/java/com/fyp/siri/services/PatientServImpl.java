@@ -113,6 +113,8 @@ public class PatientServImpl implements PatientServ {
 		Patient currentPatient = patRepo.findByEmail(userEmail);
 		profile.setName(currentPatient.getName());
 		profile.setEmail(currentPatient.getEmail());
+		profile.setDob(currentPatient.getDob());
+		profile.setGender(currentPatient.getGender());
 		profile.setAddress(currentPatient.getAddress());
 		profile.setPhone(currentPatient.getPhone());
 		return profile;
