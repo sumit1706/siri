@@ -20,12 +20,13 @@ import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Order;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
+import com.fyp.siri.models.UserProfile;
 import com.fyp.siri.services.PatientServ;
 
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 public class PatientController {
-
+	private String currentUser = "";
 	@Autowired
 	private PatientServ patientServ;
 	
@@ -46,6 +47,7 @@ public class PatientController {
 	
 	@PostMapping("/loginPatient")
 	public boolean loginPatient(@RequestBody User user) {
+		currentUser = user.getEmail();
 		return patientServ.loginPatient(user);
 	}
 	
@@ -85,5 +87,10 @@ public class PatientController {
 		order.setFile(file.getBytes());
 		System.out.println(order.getFile());
 		return patientServ.placeOrder(order);
+	}
+	
+	@GetMapping("/userProfile")
+	public UserProfile userProfile() {
+		return patientServ.userProfile(currentUser);
 	}
 }

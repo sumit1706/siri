@@ -12,6 +12,7 @@ import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Order;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
+import com.fyp.siri.models.UserProfile;
 import com.fyp.siri.repository.AppointmentRepository;
 import com.fyp.siri.repository.OrderRepository;
 import com.fyp.siri.repository.PatientRepository;
@@ -99,6 +100,22 @@ public class PatientServImpl implements PatientServ {
 		catch(Exception e){
 			return e.toString();
 		}
+	}
+
+	@Override
+	public UserProfile userProfile(String userEmail) {
+		UserProfile profile = new UserProfile();
+		profile.previousAppointments = appRepo.findByPatientEmail(userEmail);
+		profile.previousOrders = orderRepo.findByEmail(userEmail);
+		for(Order o: profile.previousOrders) {
+			o.setFile("File".getBytes());
+		}
+		Patient currentPatient = patRepo.findByEmail(userEmail);
+		profile.setName(currentPatient.getName());
+		profile.setEmail(currentPatient.getEmail());
+		profile.setAddress(currentPatient.getAddress());
+		profile.setPhone(currentPatient.getPhone());
+		return profile;
 	}
 		
 }

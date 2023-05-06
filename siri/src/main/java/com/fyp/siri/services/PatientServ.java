@@ -8,6 +8,7 @@ import com.fyp.siri.models.Appointment;
 import com.fyp.siri.models.Order;
 import com.fyp.siri.models.Patient;
 import com.fyp.siri.models.User;
+import com.fyp.siri.models.UserProfile;
 
 public interface PatientServ {
 	
@@ -30,5 +31,7 @@ public interface PatientServ {
 	public ArrayList<Appointment> findAppointments(String email);
 	
 	public String placeOrder(Order order);
+
+	public UserProfile userProfile(String email);
 	
 }
